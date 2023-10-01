@@ -155,37 +155,74 @@ h1 {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
 .pagination {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  padding: 0 10px;
+  flex-direction: row-reverse;
 }
 
 .pagination-buttons {
+  list-style: none;
+  padding: 0;
   display: flex;
-  align-items: center;
+  gap: 4px;
+  height: auto;
+
+}
+
+.pagination-button {
+  padding: 8px 12px; 
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  text-decoration: none;
+  
+  height: 15px;
+  
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-button.active {
+  background-color: #fff;
+  color: #007bff;
+  font-weight: bold;
+  border: 1px solid #007bff;
+}
+
+.pagination-button:hover:not(.active) {
+  background-color: #0056b3;
+}
+
+.pagination-button.disabled {
+  pointer-events: none;
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+
+.pagination-buttons .pagination-button:not(:last-child) {
   margin-right: 5px;
 }
-
-.pagination-count {
-  font-size: 1rem;
-  color: #333;
-}
-
 
 .car-info {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 10px;
   border: none; 
+  
 }
 
 .car-info td {
   padding: 8px;
   border: none; 
   text-align: left;
+  
 }
 
 .flex-container {
@@ -210,6 +247,45 @@ h1 {
   display: inline-block; 
 }
 
-.pagination-buttons button {
-  margin-right: 5px; 
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .search-button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .car-card {
+    flex: calc(50% - 10px);
+  }
+
+  .car-list {
+    max-width: 100%;
+    margin: 0 10px;
+  }
+
+  .pagination-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pagination-button {
+    margin-bottom: 5px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .car-card {
+    flex: 100%;
+  }
 }
