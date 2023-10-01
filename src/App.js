@@ -1,5 +1,6 @@
-
+// App.js
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import CarList from './components/CarList';
@@ -10,9 +11,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [query, setQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-
   const itemsPerPage = 6;
+  const { page } = useParams();
+  const currentPage = parseInt(page) || 1;
+  const navigate = useNavigate();
 
   const filteredCars = carsData.filter((car) =>
     car.name.toLowerCase().includes(query.toLowerCase())
@@ -22,11 +24,11 @@ function App() {
 
   const handleSearch = (searchQuery) => {
     setQuery(searchQuery);
-    setCurrentPage(1);
+    navigate(`/page/1`);
   };
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+    navigate(`/page/${newPage}`);
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -38,7 +40,7 @@ function App() {
       <h1>Car Search</h1>
       <SearchBar onSearch={handleSearch} />
       <CarList cars={displayedCars} />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
       <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={false} />
     </div>
   );
